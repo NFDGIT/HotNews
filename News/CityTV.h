@@ -10,4 +10,11 @@
 
 @interface CityTV : UITableViewController
 
+
++(instancetype)shareCityTV;
+
+
+@property (nonatomic,strong)void(^changeProvince)(NSString * province);
+
+@property (nonatomic,strong)NSString *proORcity;
 @end

@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface PHImageBrowner : UIViewController
+@property (nonatomic,strong)NSMutableArray *images;
+@property (nonatomic,strong)NSDictionary * imageDict;
+
+-(instancetype)initWithImgDict:(NSDictionary *)imgDict;
++(instancetype)createImageBrowerWithImgDict:(NSDictionary *)imgDict;
 
 @end

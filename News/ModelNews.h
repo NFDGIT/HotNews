@@ -8,17 +8,36 @@
 
 #import <Foundation/Foundation.h>
 
+
+
+typedef NS_ENUM(NSUInteger, NShowStyle) {
+    common,
+    big_image_show,
+    };
+
+
+
+//@class  ModelVideo;
 @interface ModelNews : NSObject
 
+//加判断的属性
+@property (nonatomic,assign)BOOL isFavorite;
+
+@property (nonatomic,strong)NSString * feedShowStyle;
+@property (nonatomic,strong)NSArray *pics;
+//@property (nonatomic,strong)ModelVideo *video;
+
+@property (nonatomic,strong)NSString *idstr;
+@property (nonatomic,strong)NSString *title;
+@property (nonatomic,strong)NSString *intro;
+@property (nonatomic,strong)NSString *source;
+@property (nonatomic,strong)NSURL *pic;
+@property (nonatomic,strong)NSURL *kpic;
+@property (nonatomic,strong)NSURL *link;
 
 
-@property (nonatomic,strong)NSString *nId;
-@property (nonatomic,strong)NSString *nTitle;
-@property (nonatomic,strong)NSString *nIntro;
-@property (nonatomic,strong)NSString *nSource;
-@property (nonatomic,strong)NSString *nPic;
-@property (nonatomic,strong)NSString *nKpic;
-@property (nonatomic,strong)NSArray *nPics;
-@property (nonatomic,strong)NSString *nLink;
+-(instancetype)initWithData:(NSDictionary *)data;
++(NSArray *)ModelsWith:(NSArray *)datas;
 
+-(NSMutableDictionary *)transDict;
 @end

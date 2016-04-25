@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class  ModelNews;
 @interface NewsTVCell : UITableViewCell
-
+-(void)bandingDataWithData:(ModelNews *)model;
 @end

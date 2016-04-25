@@ -10,4 +10,9 @@
 
 @interface PHLocate : UIViewController
 
++(instancetype)shareLocate;
+
+-(NSString *)getCurrentProvince;
+-(NSString *)getCurrentCity;
+
 @end

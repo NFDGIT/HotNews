@@ -7,7 +7,7 @@
 //
 
 #import "ImageVC.h"
-#import "VedioTVC.h"
+#import "ImageTVC.h"
 
 
 @interface ImageVC ()<UIPageViewControllerDataSource,UIPageViewControllerDelegate>
@@ -18,12 +18,12 @@
 
 @end
 
-@implementation VedioVC
+@implementation ImageVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setPageViewController];
-    
+    self.navigationController.navigationBar.translucent=NO;
     
     
 }
@@ -35,7 +35,7 @@
     self.pageViewController.dataSource=self;
     self.pageViewController.delegate=self;
     
-    [self.pageViewController setViewControllers:@[[VedioTVC instantWithIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    [self.pageViewController setViewControllers:@[[ImageTVC instantWithIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     
 
     
@@ -43,31 +43,31 @@
 
 //segm
 - (IBAction)segmentBtn:(UISegmentedControl *)sender {
-    [self.pageViewController setViewControllers:@[[VedioTVC instantWithIndex:sender.selectedSegmentIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    [self.pageViewController setViewControllers:@[[ImageTVC instantWithIndex:sender.selectedSegmentIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
 }
 #pragma  mark---pageDatasource
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
-    NSInteger index=((VedioTVC *)pageViewController.viewControllers.firstObject).index;
+    NSInteger index=((ImageTVC *)pageViewController.viewControllers.firstObject).index;
     index++;
     if (index>3) {
         return nil;
     }
-    return [VedioTVC instantWithIndex:index];
+    return [ImageTVC instantWithIndex:index];
 }
 
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
-    NSInteger index=((VedioTVC *)pageViewController.viewControllers.firstObject).index;
+    NSInteger index=((ImageTVC *)pageViewController.viewControllers.firstObject).index;
     index--;
     
     if (index<0) {
         return nil;
     }
 
-    return [VedioTVC instantWithIndex:index];
+    return [ImageTVC instantWithIndex:index];
 }
 
 -(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed{
-    NSInteger index=((VedioTVC *)pageViewController.viewControllers.firstObject).index;
+    NSInteger index=((ImageTVC *)pageViewController.viewControllers.firstObject).index;
     
     
     

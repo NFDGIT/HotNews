@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsTitleTableEdit">
             <connections>
+                <outlet property="contentTable" destination="Eef-dK-79E" id="sV3-b0-Wzh"/>
+                <outlet property="titleTable" destination="UpH-zl-vTt" id="wPL-Ii-gJE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +16,30 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" tag="100" contentMode="scaleToFill" misplaced="YES" bounces="NO" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="UpH-zl-vTt">
+                    <rect key="frame" x="0.0" y="0.0" width="592" height="600"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="separatorColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </tableView>
+                <tableView clipsSubviews="YES" tag="101" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Eef-dK-79E">
+                    <rect key="frame" x="100" y="0.0" width="500" height="600"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="separatorColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="UpH-zl-vTt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CNf-8s-ZFn"/>
+                <constraint firstItem="Eef-dK-79E" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="100" id="KbB-42-1e7"/>
+                <constraint firstAttribute="bottom" secondItem="Eef-dK-79E" secondAttribute="bottom" id="NMP-vv-VS5"/>
+                <constraint firstItem="UpH-zl-vTt" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="VFU-1X-mDJ"/>
+                <constraint firstAttribute="trailing" secondItem="Eef-dK-79E" secondAttribute="trailing" id="fYN-c1-7RC"/>
+                <constraint firstItem="UpH-zl-vTt" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="t5M-Y6-3Zb"/>
+                <constraint firstItem="UpH-zl-vTt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="v03-zl-xS3"/>
+                <constraint firstItem="Eef-dK-79E" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vSM-Ex-J6C"/>
+            </constraints>
+            <point key="canvasLocation" x="430" y="-28"/>
         </view>
     </objects>
 </document>

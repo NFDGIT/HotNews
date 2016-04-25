@@ -7,21 +7,74 @@
 //
 
 #import "FavoriteVC.h"
-
-@interface FavoriteVC ()
-
+#import "ContentVC.h"
+@interface FavoriteVC ()<UIPageViewControllerDataSource,UIPageViewControllerDelegate>
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segment;
+@property (nonatomic,strong)UIPageViewController *pageViewController;
 @end
 
 @implementation FavoriteVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.translucent=NO;
+    
+    [self setPageViewController];
+    
+    
     // Do any additional setup after loading the view.
 }
+- (IBAction)segment:(UISegmentedControl *)sender {
+    [self.pageViewController setViewControllers:@[[ContentVC instantWithIndex:sender.selectedSegmentIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+-(void)setPageViewController{
+    self.pageViewController=[[UIPageViewController alloc]initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    [self.pageViewController setViewControllers:@[[ContentVC instantWithIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    
+    
+    
+    self.pageViewController.delegate=self;
+    self.pageViewController.dataSource=self;
+    
+    [self addChildViewController:self.pageViewController];
+    [self.view addSubview:self.pageViewController.view];
+    
+    
+    
+    
+    
+    
+    
+}
+#pragma  mark ---dataSource
+-(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
+    NSInteger currentIndex=((ContentVC *)pageViewController.viewControllers.firstObject).index;
+    currentIndex++;
+    if (currentIndex>1) {
+        return nil;
+    }
+    
+    
+    
+    return [ContentVC instantWithIndex:currentIndex];
+}
+-(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
+    NSInteger currentIndex=((ContentVC *)pageViewController.viewControllers.firstObject).index;
+    currentIndex--;
+    if (currentIndex<0) {
+        return nil;
+    }
+
+    return [ContentVC instantWithIndex:currentIndex];
+}
+
+
+-(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed{
+    NSInteger currentIndex=((ContentVC *)pageViewController.viewControllers.firstObject).index;
+    self.segment.selectedSegmentIndex=currentIndex;
 }
 
 /*

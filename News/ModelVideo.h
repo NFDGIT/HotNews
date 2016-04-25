@@ -9,5 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface ModelVideo : NSObject
-
+@property (nonatomic,strong) NSURL * kpic;
+@property (nonatomic,strong) NSURL *pic;
+@property (nonatomic,assign) NSTimeInterval runtime;
+@property (nonatomic,strong) NSString *type;
+@property (nonatomic,strong) NSURL * url;
+@property (nonatomic,strong) NSString * video_id;
+-(instancetype)initWithData:(NSDictionary *)data;
++(instancetype)modelWithData:(NSDictionary *)data;
 @end

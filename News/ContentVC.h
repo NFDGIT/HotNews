@@ -10,4 +10,8 @@
 
 @interface ContentVC : UIViewController
 
+
+@property (nonatomic,assign) NSInteger index;
+-(instancetype)initWithIndex:(NSInteger)index;
++(instancetype)instantWithIndex:(NSInteger)index;
 @end

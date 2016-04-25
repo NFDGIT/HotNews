@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "BackVC.h"
 @interface AppDelegate ()
 
 @end
@@ -16,7 +16,21 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    UIWindow *window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    //设置window的root视图
+    
+    BackVC *backVC=[[BackVC alloc]init];
+   
+    window.rootViewController=backVC;
+    [window makeKeyAndVisible];
+    
+    self.window=window;
+    
+    
+    
+    
+    
+    
     return YES;
 }
 

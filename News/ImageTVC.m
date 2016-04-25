@@ -10,8 +10,14 @@
 #import "AFNetworking.h"
 #import "Common.h"
 #import "UIImageView+WebCache.h"
-#import "VideoCell.h"
+#import "ImageCell.h"
 #import "ModelPics.h"
+#import "Channels.h"
+
+
+#import "PHImageBrowner.h"
+
+//#import "UIViewController+PHRefresher.h"
 //#import <AVKit/AVKit.h>
 //#import <AVFoundation/AVFoundation.h>
 
@@ -21,11 +27,16 @@
 
 @interface ImageTVC ()
 @property (nonatomic,strong)NSArray *contents;
-
+@property (nonatomic,strong)NSArray *models;
 
 @property (nonatomic,strong)NSArray *params;
 
 //@property (nonatomic,strong)AVPlayer *player;
+@property (nonatomic,assign)NSInteger numbOfRefresh;
+@property (nonatomic,assign)NSInteger numbOfDropdown;
+
+//判断是刷新还是加载更多
+@property (nonatomic,assign)BOOL isUpOrDown;
 
 @end
 
@@ -38,10 +49,13 @@ static NSString *identifier=@"reuseIdentifier";
                   @{@"channel":@"hdpic_toutiao"},
                   @{@"channel":@"hdpic_funny"},
                   @{@"channel":@"hdpic_story"}];
-        
     }
     return _params;
 }
+
+
+
+
 
 -(instancetype)initWithIndex:(NSInteger)index{
     if (self=[super init]) {
@@ -57,21 +71,41 @@ static NSString *identifier=@"reuseIdentifier";
     return vedioTVC;
 }
 
-
+-(void)judgeLocaOrNet{
+    Channels *dataManager=[Channels shareSetting];
+  NSArray *localArray=[dataManager getCacheWithKey:self.params[self.index][@"channel"] ];
+    if (localArray) {
+        //如果本地有文件   把文件  传给属性   以便   跳转到图片浏览器时  把文件传给   浏览器
+        self.contents=localArray;
+        
+        self.models=[ModelNews ModelsWith:localArray];
+        
+        [self.tableView reloadData];
+    }else{
+    [self downLoadFromNetWithParam:self.params[self.index]];
+        
+    }
+    
+    
+    
+}
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.numbOfDropdown=0;
+    self.numbOfRefresh=0;
+    
     self.tableView.rowHeight=250;
+
+
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ImageCell class]) bundle:nil] forCellReuseIdentifier:identifier];
+
+    [self judgeLocaOrNet];
+    ///创建下拉刷新
     
-    
-    
-    
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([VideoCell class]) bundle:nil] forCellReuseIdentifier:identifier];
-    
-    
-    [self downLoadFromNetWithParam:self.params[self.index]];
-    
+    self.refreshControl=[[UIRefreshControl alloc]init];
+
     
 }
 
@@ -80,7 +114,7 @@ static NSString *identifier=@"reuseIdentifier";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return self.contents.count;
+    return self.models.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -95,14 +129,14 @@ static NSString *identifier=@"reuseIdentifier";
     
     tableView.sectionHeaderHeight=20;
     tableView.sectionFooterHeight=40;
-    VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    ImageCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     // Configure the cell...
     cell.backgroundColor=[UIColor clearColor];
     
     
     
     //获取当前模型
-    ModelNews *model=self.contents[indexPath.section];
+    ModelNews *model=self.models[indexPath.section];
     
 
     [cell.imgView.layer.sublayers enumerateObjectsUsingBlock:^(CALayer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -121,44 +155,141 @@ static NSString *identifier=@"reuseIdentifier";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    //取出当前模型
+    ModelNews *modelNews=self.models[indexPath.section];
     
-    VideoCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-    //获取当前的model
-    ModelNews *modelNews=self.contents[indexPath.section];
-  //  ModelVideo *modelVideo=modelNews.video;
+    NSMutableArray *picInfos=[NSMutableArray array];
     
-    //[self PlayerActionWithView:cell.imgView andUrl:modelVideo.url];
+    for (ModelPics *modelPic in modelNews.pics) {
+        
+        
+
+        NSDictionary  *dict=@{@"urlString":modelPic.kpic.absoluteString,@"alt":modelPic.alt};
+        
+        
+        [picInfos addObject:dict];
+    }
+    
+    PHImageBrowner *imgBrower=[PHImageBrowner createImageBrowerWithImgDict:self.contents[indexPath.section]];
+    
+    //给   浏览器 传值
+
+ 
+    
+    
+    
+    [self.navigationController pushViewController:imgBrower animated:YES];
+}
+
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.contents.count-indexPath.section<3) {
+        
+        
+        if (self.isUpOrDown!=NO) {
+            self.isUpOrDown=NO;
+            self.numbOfDropdown++;
+            [self downLoadFromNetWithParam:self.params[self.index]];
+        }
+        
+    }
+    
+    
     
 }
 
 
-
 -(void)downLoadFromNetWithParam:(NSDictionary *)param{
+    [self.refreshControl beginRefreshing];
+    
+    //判断下拉还是刷新并改变参数
+    NSString *upOrDown=self.isUpOrDown?@"down":@"up";
+    
+    NSString *times=self.isUpOrDown?@(self.numbOfRefresh).stringValue:@(self.numbOfDropdown).stringValue;
+    
+    //下拉刷新的参数
+    
+     
+    NSMutableDictionary  * parameters= [NSMutableDictionary dictionaryWithDictionary:@{@"pull_direction":upOrDown,@"pull_times":times}];
+    [parameters addEntriesFromDictionary:param];
+    
+    
+  
+    
     AFHTTPSessionManager  *manager=[[AFHTTPSessionManager alloc]init];
     
     
+      NSLog(@">>>%@",parameters);
     
-    
-    [manager GET:apiUrl parameters:param progress:^(NSProgress * _Nonnull downloadProgress) {
+    [manager GET:apiUrl parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        
         NSArray *result=((NSDictionary *)responseObject)[@"data"][@"list"];
         
-        
-        
-        self.contents=[ModelNews ModelsWith:result];
-        
-        
+        //把原始数据传送给  self.contents;
+        self.contents=result;
         
         //self.contents=result;
         
-        [self.tableView reloadData];
-        NSLog(@"<<<<%ld",result.count);
+
+        [self.refreshControl endRefreshing];
+        self.numbOfRefresh++;
+        
+        
+    //判断是  下拉刷新 还是加载更多
+        if (self.isUpOrDown) {
+            //下拉刷新  先清空本地的数据
+            [[Channels shareSetting] deleteCacheWithKey:self.params[self.index][@"channel"] ];
+        }
+        
+        
+        
+    ///把网络上请求的数据存储到本地
+   [[Channels shareSetting] insertCacheWithData:result andKey:self.params[self.index][@"channel"]];
+   
+        
+     //网络请求成功后  把存储到  本地的数据  传给  self.contents
+        self.contents=[[Channels shareSetting] getCacheWithKey:@"channel"];
+        
+        
+        
+        
+    //把本地的数据   读取到内存
+        
+    self.models=[ModelNews ModelsWith:[[Channels shareSetting] getCacheWithKey:self.params[self.index][@"channel"]]];
+        
+        
+    //锁定  让下拉刷新可以 执行
+    self.isUpOrDown=YES;
+    [self.tableView reloadData];
+        
+       // NSLog(@"<<<<%ld",result.count);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
     
 }
+#pragma  mark ---图片浏览器
+
+#pragma  mark----scroll view
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    
+    //NSLog(@">>>>>>>>%lf",scrollView.contentOffset.y);
+    
+    if (scrollView.contentOffset.y<-30) {
+        self.isUpOrDown=YES;
+        
+       // [[Channels shareSetting] deleteCacheWithKey:self.params[self.index][@"channel"]];
+        [self downLoadFromNetWithParam:self.params[self.index]];
+    }
+    
+}
+
+
 #pragma  mark  --视频播放器
 /*
 

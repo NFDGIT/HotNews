@@ -6,22 +6,242 @@
 //  Copyright © 2016年 qingyun. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ViewController.h"//Users/qingyun/Desktop/彭辉/项目/0414/News/News
+#import "NewsContentTVC.h"
+#import "Channels.h"
+#import "NewsTitleEdit.h"
+#import "CityTV.h"
+#import "NewsTitleTableEdit.h"
 
-@interface ViewController ()
+
+#define  tY  5
+#define  tW  50
+#define  tS  20
+
+
+@interface ViewController ()<UIPageViewControllerDataSource,UIPageViewControllerDelegate>
+//用来保存 当前 城市和省份 便于初始化时加载已选好的数据
+@property (nonatomic,strong)NSString *currentCity;
+@property (nonatomic,strong)NSString *currentProvince;
+
+
+
+@property (nonatomic,assign)NSInteger currentIndex;
+
+//views
+@property (nonatomic,strong)UIScrollView *titleSV;
+
+
+//@property (nonatomic,strong)NSMutableArray *channels;//频道
+@property (nonatomic,strong)Channels *pChannels;
+
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+{
+    UIPageViewController *_pageViewController;
+    int _currentPage;
+  
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.currentProvince=@"henan";
+    self.currentCity=@"zhengzhou";
+    
+    
+    self.navigationController.navigationBar.translucent=NO;
+    _pChannels=[[Channels alloc]init];
+    
+    [self createUI];
+    
+    _titleSV=[self setTitleViewWithFrame:self.navigationItem.titleView.frame];
+    [self.navigationItem.titleView addSubview:_titleSV];
+    [self relizeBlock];
+    
+    
+    
+ 
+    NSLog(@"%d",_currentPage);
+}
+-(void)relizeBlock{
+    
+    CityTV *city=[CityTV shareCityTV];
+    city.changeProvince=^(NSString  *province){
+        
+        NewsContentTVC *contentTVC=[NewsContentTVC instantTableVCWith:self.currentIndex];
+        
+        
+        
+        
+        contentTVC.currentProvince=[self.pChannels  getSpellingFromCC:province];
+        contentTVC.currentCity=[self.pChannels getSpellingFromCC:province];
+        
+        [_pageViewController setViewControllers:@[contentTVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        
+        
+        UIButton *button=[_titleSV viewWithTag:self.currentIndex+100];
+        [button setTitle:province forState:UIControlStateNormal];
+        
+        
+        
+        
+    };
+    
+
+    
+    
+}
+-(UIScrollView *)setTitleViewWithFrame:(CGRect )frame{
+    ///标题的尺寸
+
+    CGFloat tH=frame.size.height-2*tY;
+    
+    
+    UIScrollView *titleSV=[[UIScrollView alloc]init];
+    titleSV.frame=CGRectMake(0, 0, frame.size.width, frame.size.height);
+    //titleSV.backgroundColor=[UIColor redColor];
+    
+        for (int i=0; i<_pChannels.channels.count; i++) {
+            
+            titleSV.contentSize=CGSizeMake((tS+tW)*(i+1)+tS,frame.size.height);
+            CGFloat tX=tS*(i+1)+tW*i;
+            
+            UIButton *titleBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+            titleBtn.frame=CGRectMake(tX, tY, tW, tH);
+            
+            if (![[_pChannels channelTypeWithIndex:i] isEqualToString:@"local"]) {
+                [titleBtn setTitle:_pChannels.channels[i][@"title"] forState:UIControlStateNormal];
+                [titleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                
+                
+                
+            }
+            
+//            [titleBtn setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
+            [titleBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+            [titleBtn addTarget:self action:@selector(titleBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            titleBtn.tag=100+i;
+            titleBtn.backgroundColor=[UIColor colorWithRed:0.9 green:0.5 blue:0.9 alpha:1];
+            titleBtn.layer.cornerRadius=5;
+            [titleSV addSubview:titleBtn];
+            
+           
+        }
+    return titleSV;
+}
+//添加titleView的点击事件
+-(void)titleBtnClick:(UIButton *)sender{
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        NewsContentTVC *newContentTVC=[NewsContentTVC instantTableVCWith:sender.tag-100];
+        newContentTVC.currentCity=self.currentCity;
+        newContentTVC.currentProvince=self.currentProvince;
+        
+        
+        [_pageViewController setViewControllers:@[newContentTVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        self.currentIndex=sender.tag-100;
+    }];
+    
+    for (UIButton *btn in sender.superview.subviews) {
+        
+        if ([btn isKindOfClass:[UIButton class]]) {
+           btn.selected=NO;
+        }
+    }
+    
+    sender.selected=YES;
+}
+
+
+
+
+-(void)createUI{
+    _pageViewController=[[UIPageViewController alloc]initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    
+    [_pageViewController setViewControllers:@[[NewsContentTVC instantTableVCWith:0]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    _pageViewController.delegate=self;
+    _pageViewController.dataSource=self;
+
+    
+    
+    [self addChildViewController:_pageViewController];
+    [self.view addSubview:_pageViewController.view];
+
+}
+- (IBAction)editTB:(UIBarButtonItem *)sender {
+    
+    NewsTitleTableEdit *titleEdit=[[NewsTitleTableEdit alloc]init];
+    [self.navigationController pushViewController:titleEdit animated:YES];
+
+}
+                              
+                              
+# pragma  mark ---datasource
+- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
+
+    NewsContentTVC *cont= (NewsContentTVC*)viewController;
+    NSInteger index = cont.countIndex;
+
+    index--;
+    if (index < 0) {
+        return nil;
+    }
+    
+    self.currentIndex=index;
+    return [NewsContentTVC instantTableVCWith:index];
+
+}
+- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
+
+    
+    NewsContentTVC *cont = (NewsContentTVC *)viewController;
+    NSInteger index = cont.countIndex;
+
+    index++;
+    if (index > _pChannels.channels.count-1) {
+        return nil;
+    }
+    self.currentIndex=index;
+    
+    return [NewsContentTVC instantTableVCWith:index];
+
+}
+
+
+-(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed{
+    NSInteger index = 0;
+    index=((NewsContentTVC *)(pageViewController.viewControllers.firstObject)).countIndex;
+    if (completed) {
+        
+        [self setTitleSVWithIndex:index];
+        
+        NSLog(@"%ld",index);
+        
+       // _titleSV.contentOffset=CGPointMake((tW+tS)*index, 0);
+    }
+    
+    
+}
+-(void)setTitleSVWithIndex:(NSInteger )index{
+    self.titleSV.contentOffset=CGPointMake((tW+tS)*index+tS, 0);
+    [self.titleSV.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[UIButton class]]) {
+            UIButton *btn=(UIButton *)obj;
+            [btn setSelected:NO];
+            if (btn.tag==index+100){
+                [btn setSelected:YES];
+            }
+        }
+        
+        
+    }];
+    
+    
 }
 
 @end

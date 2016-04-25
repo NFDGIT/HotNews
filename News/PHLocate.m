@@ -14,16 +14,32 @@
 
 @implementation PHLocate
 
+
++(instancetype)shareLocate{
+    static PHLocate *locate;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        locate =[[PHLocate alloc]init];
+    });
+    
+    return locate;
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    
+    
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(NSString *)getCurrentProvince{
+    return nil;
 }
-
+-(NSString *)getCurrentCity{
+    
+    return nil;
+}
 /*
 #pragma mark - Navigation
 
