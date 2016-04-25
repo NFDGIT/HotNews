@@ -23,8 +23,8 @@
     ///self.imgView.layer=;
     
     
-    [self.imgView sd_setImageWithURL:model.kpic];
-    
+   // [self.imgView sd_setImageWithURL:model.kpic];
+    [self.imgView sd_setImageWithURL:model.kpic placeholderImage:[UIImage imageNamed:@"pic_imgCache"]];
     
   //  self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.textBtn setTitle:model.title forState:UIControlStateNormal];

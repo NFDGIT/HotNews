@@ -133,7 +133,15 @@
 
 //取出订阅信息
 -(NSMutableArray *)getSubcribeSetting{
- 
+    NSMutableArray *subc=[self getFileWithname:titleSettingName];
+    if (subc==nil) {
+        subc=[NSMutableArray array];
+        [subc addObject:self.channels.firstObject];
+        return subc;
+    }else if (subc.count==0){
+        [subc addObject:self.channels.firstObject];
+        return subc;
+    }
     return  [self getFileWithname:titleSettingName];
 }
 
@@ -183,7 +191,7 @@ return  [self getFileWithname:favoritePhotoName];
 -(NSString *)channelTypeWithIndex:(NSInteger)index{
     
     
-    NSString *channel=self.channels[index][@"channel"];
+    NSString *channel=[self getSubcribeSetting][index][@"channel"];
     
     if([channel hasPrefix:@"house"]){
         return @"house";

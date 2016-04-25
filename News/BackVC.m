@@ -26,6 +26,10 @@
         _mainVC=[
         storyBoard instantiateViewControllerWithIdentifier:@"main"];
         
+       
+        
+        
+        
         
         [self addChildViewController:_settingVC];
         [self.view addSubview:_settingVC.view];
@@ -73,14 +77,17 @@
             
             [_settingVC.view reloadInputViews];
            [UIView  animateWithDuration:0.2 animations: ^{
-            _mainVC.view.frame=CGRectMake([UIScreen mainScreen].bounds.size.width*2/3, 0,[UIScreen mainScreen].bounds.size.width , [UIScreen mainScreen].bounds.size.height);
+         //   _mainVC.view.frame=CGRectMake([UIScreen mainScreen].bounds.size.width*2/3, 0,[UIScreen mainScreen].bounds.size.width , [UIScreen mainScreen].bounds.size.height);
+               _mainVC.view.transform=CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width*2/3, 0);
+               
            } completion:^(BOOL finished) {
                sender.edges=UIRectEdgeRight;
            } ];
  
         }else{
             [UIView animateWithDuration:0.2 animations:^{
-            _mainVC.view.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+//            _mainVC.view.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+                _mainVC.view.transform=CGAffineTransformMakeTranslation(0, 0);
             } completion:^(BOOL finished) {
                 sender.edges=UIRectEdgeLeft;
             }];

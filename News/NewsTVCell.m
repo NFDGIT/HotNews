@@ -25,7 +25,8 @@
 
 
 -(void)bandingDataWithData:(ModelNews *)model{
-    [self.imgView sd_setImageWithURL:model.kpic];
+  //  [self.imgView sd_setImageWithURL:model.kpic ];
+    [self.imgView sd_setImageWithURL:model.kpic placeholderImage:[UIImage imageNamed:@"pic_imgCache"]];
     self.titleLabel.text=model.title;
     self.introLabel.text=model.intro;
     

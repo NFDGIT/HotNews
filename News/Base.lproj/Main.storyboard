@@ -75,8 +75,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="3e2-mN-THy">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="pic_set1.png" id="G1v-KA-JQR">
+                            <connections>
+                                <action selector="setAction:" destination="BYZ-38-t0r" id="AoR-JC-iVt"/>
+                            </connections>
+                        </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="v0B-qL-xL3">
-                            <rect key="frame" x="67" y="6" width="466" height="33"/>
+                            <rect key="frame" x="74" y="6" width="466" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -186,7 +191,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vIJ-aZ-wBp" firstAttribute="top" secondItem="rZq-g6-Kpz" secondAttribute="bottom" constant="56" id="FIE-8J-K9Q"/>
                             <constraint firstItem="vIJ-aZ-wBp" firstAttribute="height" secondItem="Few-R2-4L2" secondAttribute="height" multiplier="3/5" constant="22" id="bkz-V8-Vnr"/>
@@ -270,6 +275,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="vn8-B1-cu9">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="pic_set1.png" id="z7W-9T-QrK">
+                            <connections>
+                                <action selector="setAction:" destination="gqe-OM-X4v" id="PhG-Zp-H9h"/>
+                            </connections>
+                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="YfV-50-pKf">
                             <rect key="frame" x="224" y="7" width="152" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -305,14 +315,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="bBU-dE-v8q">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="pic_set1.png" id="SzM-fM-jQ2">
+                            <connections>
+                                <action selector="setAction:" destination="2xT-xG-MHG" id="QEJ-Ep-9ak"/>
+                            </connections>
+                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="1jx-s4-znc">
-                            <rect key="frame" x="28" y="7" width="545" height="30"/>
+                            <rect key="frame" x="72" y="7" width="466" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="开心一刻"/>
+                                <segment title="明星八卦"/>
+                                <segment title="热点头条"/>
                                 <segment title="社会奇闻"/>
-                                <segment title="暖心片刻"/>
-                                <segment title="娱乐八卦"/>
+                                <segment title="体育健身"/>
                             </segments>
                             <connections>
                                 <action selector="segmentBtn:" destination="2xT-xG-MHG" eventType="valueChanged" id="eFq-rh-BcR"/>
@@ -334,5 +349,6 @@
         <image name="pic_favorite.png" width="30" height="30"/>
         <image name="pic_img.png" width="30" height="30"/>
         <image name="pic_news.png" width="30" height="30"/>
+        <image name="pic_set1.png" width="35" height="25"/>
     </resources>
 </document>

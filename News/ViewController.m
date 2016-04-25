@@ -34,7 +34,7 @@
 
 //@property (nonatomic,strong)NSMutableArray *channels;//频道
 @property (nonatomic,strong)Channels *pChannels;
-
+@property (nonatomic,strong)NSMutableArray *subcChannels;
 
 @end
 
@@ -46,9 +46,34 @@
   
 
 }
+//-(NSMutableArray *)subcChannels{
+//    if (_subcChannels==nil) {
+//        _subcChannels=[[Channels shareSetting]getSubcribeSetting];
+//    }
+//    return _subcChannels;
+//}
 
+-(void)popHint{
+    UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"提示" message:@"默认订阅太少？点击右上角订阅你喜欢的栏目吧!" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //跳转到  新闻页
+       // self.tabBarController.selectedIndex=1;
+        
+        
+        
+    }];
+    
+    [alert addAction:action];
+  
+    [self presentViewController:alert animated:YES completion:nil];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+ 
+    if ([[Channels shareSetting]getSubcribeSetting].count<2) {
+        [self popHint];
+    }
+    
     self.currentProvince=@"henan";
     self.currentCity=@"zhengzhou";
     
@@ -56,16 +81,46 @@
     self.navigationController.navigationBar.translucent=NO;
     _pChannels=[[Channels alloc]init];
     
+       [self relizeBlock];
+    
+    
+    //设置ui
+    
+    
     [self createUI];
     
     _titleSV=[self setTitleViewWithFrame:self.navigationItem.titleView.frame];
     [self.navigationItem.titleView addSubview:_titleSV];
-    [self relizeBlock];
     
     
+    //初始化 程序 刚运行时   titleView  默认哪个为选中状态
+    for (UIButton *btn in self.titleSV.subviews) {
+        if ([btn isKindOfClass:[UIButton class]]) {
+            if (btn.tag==100) {
+                btn.selected=YES;
+            }
+        }
+    }
+
     
  
-    NSLog(@"%d",_currentPage);
+   // NSLog(@"%d",_currentPage);
+}
+
+-(void)refreshTitleView{
+    [self.navigationItem.titleView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    _titleSV=[self setTitleViewWithFrame:self.navigationItem.titleView.frame];
+    [self.navigationItem.titleView addSubview:_titleSV];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.subcChannels=[[Channels shareSetting]getSubcribeSetting];
+
+    [self refreshTitleView];
+    
 }
 -(void)relizeBlock{
     
@@ -105,7 +160,7 @@
     titleSV.frame=CGRectMake(0, 0, frame.size.width, frame.size.height);
     //titleSV.backgroundColor=[UIColor redColor];
     
-        for (int i=0; i<_pChannels.channels.count; i++) {
+        for (int i=0; i<self.subcChannels.count; i++) {
             
             titleSV.contentSize=CGSizeMake((tS+tW)*(i+1)+tS,frame.size.height);
             CGFloat tX=tS*(i+1)+tW*i;
@@ -114,7 +169,7 @@
             titleBtn.frame=CGRectMake(tX, tY, tW, tH);
             
             if (![[_pChannels channelTypeWithIndex:i] isEqualToString:@"local"]) {
-                [titleBtn setTitle:_pChannels.channels[i][@"title"] forState:UIControlStateNormal];
+                [titleBtn setTitle:self.subcChannels[i][@"title"] forState:UIControlStateNormal];
                 [titleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 
                 
@@ -157,6 +212,24 @@
     sender.selected=YES;
 }
 
+- (IBAction)setAction:(UIBarButtonItem *)sender {
+    if (self.tabBarController.view.frame.origin.x==0) {
+        
+        [UIView  animateWithDuration:0.2 animations: ^{
+            self.tabBarController.view.transform=CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width*2/3, 0);
+        } ];
+        
+    }else{
+        [UIView animateWithDuration:0.2 animations:^{
+        self.tabBarController.view.transform=CGAffineTransformMakeTranslation(0, 0);
+            
+        }];
+        
+    }
+    
+    
+    
+}
 
 
 
@@ -176,6 +249,7 @@
 - (IBAction)editTB:(UIBarButtonItem *)sender {
     
     NewsTitleTableEdit *titleEdit=[[NewsTitleTableEdit alloc]init];
+    titleEdit.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:titleEdit animated:YES];
 
 }
@@ -203,7 +277,7 @@
     NSInteger index = cont.countIndex;
 
     index++;
-    if (index > _pChannels.channels.count-1) {
+    if (index > self.subcChannels.count-1) {
         return nil;
     }
     self.currentIndex=index;
@@ -228,7 +302,7 @@
     
 }
 -(void)setTitleSVWithIndex:(NSInteger )index{
-    self.titleSV.contentOffset=CGPointMake((tW+tS)*index+tS, 0);
+    self.titleSV.contentOffset=CGPointMake((tW+tS)*index+tS-120, 0);
     [self.titleSV.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[UIButton class]]) {
             UIButton *btn=(UIButton *)obj;

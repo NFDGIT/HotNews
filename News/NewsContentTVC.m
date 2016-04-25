@@ -30,6 +30,8 @@
 
 @property (nonatomic ,strong)UILabel *label;
 @property (nonatomic,strong)Channels *pChannels;
+@property (nonatomic,strong)NSMutableArray *subcChannels;
+
 
 //刷新的参数
 @property (nonatomic,assign)NSInteger numbOfRefresh;
@@ -45,6 +47,15 @@
 
 @implementation NewsContentTVC
 static NSString *cellIdentifier=@"cell";
+
+-(NSMutableArray *)subcChannels{
+    if (_subcChannels==nil) {
+        _subcChannels=[[Channels shareSetting]getSubcribeSetting];
+    }
+    return _subcChannels;
+}
+
+
 -(Channels *)pChannels{
     if (!_pChannels) {
         _pChannels=[[Channels alloc]init];
@@ -183,7 +194,7 @@ static NSString *cellIdentifier=@"cell";
     
     //主要频道
     if ([channelType isEqualToString:@"news"]) {
-        channelParam=_pChannels.channels[index][@"channel"];
+        channelParam=self.subcChannels[index][@"channel"];
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //            [self setContentWithChannel:_pChannels.channels[index][@"channel"]];
 //        });
@@ -197,7 +208,7 @@ static NSString *cellIdentifier=@"cell";
         
         [self setHeaderView];
         
-        NSDictionary *currentChannel= self.pChannels.channels[self.countIndex];
+        NSDictionary *currentChannel=self.subcChannels[self.countIndex];
         NSString *s1=currentChannel[@"channel"];
         NSString *s2=self.currentProvince;
         
@@ -217,7 +228,7 @@ static NSString *cellIdentifier=@"cell";
        // [self.pChannels getProvince];
         [self setHeaderView];
         
-        NSDictionary *currentChannel= self.pChannels.channels[self.countIndex];
+        NSDictionary *currentChannel=self.subcChannels[self.countIndex];
         NSString *s1=currentChannel[@"channel"];
         NSString *s2=self.currentCity;
         

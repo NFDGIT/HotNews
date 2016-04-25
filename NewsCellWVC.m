@@ -30,6 +30,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self judgeSubcIsNil];
     [self setNavigation];
     
     
@@ -40,6 +41,24 @@
 
     // Do any additional setup after loading the view.
 }
+
+
+//确保  订阅信息  补位空   或者  个数为零
+-(void)judgeSubcIsNil{
+    
+    NSMutableArray *subcs=[[Channels shareSetting]getSubcribeSetting];
+    if (subcs==nil) {
+        subcs=[NSMutableArray array];
+        [subcs addObject:[Channels shareSetting].channels.firstObject];
+        [[Channels shareSetting] saveSubcribeSettingWithArray:subcs];
+    }else if(subcs.count==0){
+        [subcs addObject:[Channels shareSetting].channels.firstObject];
+        [[Channels shareSetting] saveSubcribeSettingWithArray:subcs];
+    }
+    
+}
+
+
 -(void)setNavigation{
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"pic_back"] style:UIBarButtonItemStyleDone target:self action:@selector(backAction:)];
 }

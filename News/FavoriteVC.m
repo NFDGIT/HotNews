@@ -27,6 +27,25 @@
 - (IBAction)segment:(UISegmentedControl *)sender {
     [self.pageViewController setViewControllers:@[[ContentVC instantWithIndex:sender.selectedSegmentIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
 }
+- (IBAction)setAction:(UIBarButtonItem *)sender {
+    if (self.tabBarController.view.frame.origin.x==0) {
+        
+        [UIView  animateWithDuration:0.2 animations: ^{
+            self.tabBarController.view.transform=CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width*2/3, 0);
+        } ];
+        
+    }else{
+        [UIView animateWithDuration:0.2 animations:^{
+            self.tabBarController.view.transform=CGAffineTransformMakeTranslation(0, 0);
+            
+        }];
+        
+    }
+    
+    
+    
+    
+}
 
 
 
