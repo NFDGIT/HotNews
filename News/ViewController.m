@@ -108,7 +108,7 @@
     if (self.subcChannels.count<2) {
         [self popHint];
     }
-  ///  NSLog(@"%d",_currentPage);
+  
 }
 
 -(void)refreshTitleView{

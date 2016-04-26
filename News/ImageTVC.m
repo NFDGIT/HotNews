@@ -219,7 +219,7 @@ static NSString *identifier=@"reuseIdentifier";
     AFHTTPSessionManager  *manager=[[AFHTTPSessionManager alloc]init];
     
     
-      NSLog(@">>>%@",parameters);
+    
     
     [manager GET:apiUrl parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
@@ -265,9 +265,9 @@ static NSString *identifier=@"reuseIdentifier";
     self.isUpOrDown=YES;
     [self.tableView reloadData];
         
-       // NSLog(@"<<<<%ld",result.count);
+   
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+    
     }];
     
 }
@@ -278,7 +278,7 @@ static NSString *identifier=@"reuseIdentifier";
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
     
-    //NSLog(@">>>>>>>>%lf",scrollView.contentOffset.y);
+   
     
     if (scrollView.contentOffset.y<-30) {
         self.isUpOrDown=YES;
@@ -325,7 +325,7 @@ static NSString *identifier=@"reuseIdentifier";
     
 }
 -(void)playfinsh:(NSNotification *)fication{
-    NSLog(@"======%@",fication);
+    
     //移除layer
 }
 */

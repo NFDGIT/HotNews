@@ -66,7 +66,7 @@
     _mainVC.view.transform=CGAffineTransformTranslate(_mainVC.view.transform, [sender translationInView:_mainVC.view].x, 0);
     [sender setTranslation:CGPointZero inView:_mainVC.view];
     
-    NSLog(@"bianyuan");
+  
     
     
     

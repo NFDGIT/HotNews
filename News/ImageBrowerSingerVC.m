@@ -73,7 +73,7 @@
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:self.picUrlString]];
     
     
-    self.imgLable.text=[NSString stringWithFormat:@"%ld/%ld",self.picnubTotal,(long)self.index+1];
+    self.imgLable.text=[NSString stringWithFormat:@"%ld/%ld",(long)self.picnubTotal,(long)self.index+1];
     self.imgLable.textColor=[UIColor whiteColor];
     
 

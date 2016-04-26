@@ -102,7 +102,7 @@ _titleCView =[[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.f
     
 }
 -(void)cesi:(UIButton *)sender{
-    NSLog(@"跳转");
+   
     NewsTitleTableEdit *titleTE=[[NewsTitleTableEdit alloc]init];
     [self.navigationController pushViewController:titleTE animated:YES];
     

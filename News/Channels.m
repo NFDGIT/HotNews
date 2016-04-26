@@ -118,7 +118,6 @@
     
     NSMutableArray *mArray=[NSMutableArray arrayWithContentsOfFile:filePath];
     
-        NSLog(@"%@",filePath);
     
     return mArray;
     
@@ -210,7 +209,7 @@ return  [self getFileWithname:favoritePhotoName];
 -(NSMutableArray *)transFromString{
     NSString *string=@"1、j山东：济南 2、j河北：石家庄 3、j吉林：长春 4、j黑龙江：哈尔滨 5、j辽宁：沈阳 6、j内蒙古：呼和浩特 7、j新疆：乌鲁木齐 8、j甘肃：兰州 9、j宁夏：银川 10、山西：太原 11、陕西：西安 12、河南：郑州 13、安徽：合肥 14、江苏：南京 15、浙江：杭州 16、福建：福州 17、广东：广州 18、江西：南昌 19、海南：海口 20、广西：南宁 21、贵州：贵阳 22、湖南：长沙 23、湖北：武汉 24、四川：成都 25、云南：昆明 26、西藏：拉萨 27、青海：西宁 28、天津：天津 29、上海：上海 30、重庆：重庆 31、北京：北京 32、台湾：台北 33、香港 34、澳门";
     NSArray *array=[string componentsSeparatedByString:@" "];
-  //  NSLog(@"%@",array);
+ 
     
     NSMutableArray *mArray=[NSMutableArray array];
     [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -267,8 +266,6 @@ return  [self getFileWithname:favoritePhotoName];
     NSString *filePath=[documentPath stringByAppendingPathComponent:name];
     
     NSMutableDictionary *mDict=[NSMutableDictionary dictionaryWithContentsOfFile:filePath];
-    
-    NSLog(@"%@",filePath);
     
     return mDict;
 }

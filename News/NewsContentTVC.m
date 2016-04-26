@@ -163,7 +163,7 @@ static NSString *cellIdentifier=@"cell";
 //加载更多
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld",indexPath.row);
+ 
  NSArray *currentDatas= [self.pChannels getCacheWithKey:self.currentChannel];
     
     if (currentDatas.count-indexPath.row<5){
@@ -323,7 +323,7 @@ static NSString *cellIdentifier=@"cell";
     session.responseSerializer=response;
     
     [session GET:apiUrl parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
-        NSLog(@"%@", downloadProgress);
+ 
         
         if (downloadProgress.fractionCompleted==1) {
             self.isNetRequesting=NO;
@@ -339,7 +339,7 @@ static NSString *cellIdentifier=@"cell";
         
         
         NSArray * contents=dict[@"data"][@"list"];
-      // NSLog(@"%@",contents.firstObject);
+
         
         if (self.isUpOrDown) {
             [self.pChannels deleteCacheWithKey:channel];
@@ -355,19 +355,17 @@ static NSString *cellIdentifier=@"cell";
         
         self.numbOfDropdown++;
         self.numbOfRefresh++;
-        NSLog(@"%ld",self.numbOfRefresh);
-        [self.refreshControl endRefreshing];
+               [self.refreshControl endRefreshing];
         self.isUpOrDown=YES;
         
         
-            NSLog(@"加载完成");
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+       
     }];
 }
 #pragma  mark  ---scroll view
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    NSLog(@"%lf",scrollView.contentOffset.y);
+
     
     if (scrollView.contentOffset.y<-50) {
         //self.isUpOrDown=YES;

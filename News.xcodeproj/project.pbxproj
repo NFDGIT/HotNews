@@ -497,7 +497,6 @@
 				TargetAttributes = {
 					CC43E4F51CC11426004FDBA0 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = VJFFGYMZJ9;
 					};
 				};
 			};
@@ -659,6 +658,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "e4fdbd57-10fb-4168-bb2c-a9313757364b";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -696,6 +696,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "e4fdbd57-10fb-4168-bb2c-a9313757364b";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -711,9 +712,10 @@
 				INFOPLIST_FILE = News/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qingyun.toutiao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qingyun.1512.hotnewsPP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "e4fdbd57-10fb-4168-bb2c-a9313757364b";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -726,9 +728,10 @@
 				INFOPLIST_FILE = News/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qingyun.toutiao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qingyun.1512.hotnewsPP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "e4fdbd57-10fb-4168-bb2c-a9313757364b";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
