@@ -51,12 +51,12 @@ static NSString *identifierC=@"contentCell";
     tishi.text=@"向左拖动,增删订阅项!";
     self.contentTable.tableHeaderView=tishi;
     
-    
-    self.contentTable.dataSource=self;
     self.titleTable.dataSource=self;
-    
-    self.contentTable.delegate=self;
+    self.contentTable.dataSource=self;
+
     self.titleTable.delegate=self;
+    self.contentTable.delegate=self;
+    
     
     self.currentArray=_channels.channels;
     

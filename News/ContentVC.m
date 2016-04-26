@@ -43,6 +43,11 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (self.models==nil){
+        [self popHint];
+    }else if(self.models.count==0){
+        [self popHint];
+    }
     
     // Do any additional setup after loading the view.
 }
@@ -63,11 +68,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (self.models==nil){
-        [self popHint];
-    }else if(self.models.count==0){
-        [self popHint];
-    }
+
     
     
     switch (self.index) {

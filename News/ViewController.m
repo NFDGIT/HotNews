@@ -69,17 +69,18 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
-    if ([[Channels shareSetting]getSubcribeSetting].count<2) {
-        [self popHint];
-    }
+    self.pChannels=[[Channels alloc]init];
+    self.subcChannels=[self.pChannels getSubcribeSetting];
+    [self refreshTitleView];
+    
+
     
     self.currentProvince=@"henan";
     self.currentCity=@"zhengzhou";
     
     
     self.navigationController.navigationBar.translucent=NO;
-    _pChannels=[[Channels alloc]init];
+ 
     
        [self relizeBlock];
     
@@ -90,6 +91,7 @@
     [self createUI];
     
     _titleSV=[self setTitleViewWithFrame:self.navigationItem.titleView.frame];
+    
     [self.navigationItem.titleView addSubview:_titleSV];
     
     
@@ -103,8 +105,10 @@
     }
 
     
- 
-   // NSLog(@"%d",_currentPage);
+    if (self.subcChannels.count<2) {
+        [self popHint];
+    }
+  ///  NSLog(@"%d",_currentPage);
 }
 
 -(void)refreshTitleView{
@@ -116,7 +120,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     self.subcChannels=[[Channels shareSetting]getSubcribeSetting];
 
     [self refreshTitleView];
@@ -216,7 +219,7 @@
     if (self.tabBarController.view.frame.origin.x==0) {
         
         [UIView  animateWithDuration:0.2 animations: ^{
-            self.tabBarController.view.transform=CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width*2/3, 0);
+            self.tabBarController.view.transform=CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width*2/5, 0);
         } ];
         
     }else{

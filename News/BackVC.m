@@ -78,7 +78,7 @@
             [_settingVC.view reloadInputViews];
            [UIView  animateWithDuration:0.2 animations: ^{
          //   _mainVC.view.frame=CGRectMake([UIScreen mainScreen].bounds.size.width*2/3, 0,[UIScreen mainScreen].bounds.size.width , [UIScreen mainScreen].bounds.size.height);
-               _mainVC.view.transform=CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width*2/3, 0);
+               _mainVC.view.transform=CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width*2/5, 0);
                
            } completion:^(BOOL finished) {
                sender.edges=UIRectEdgeRight;

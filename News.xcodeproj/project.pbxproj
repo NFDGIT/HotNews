@@ -11,6 +11,7 @@
 		CC1C35CE1CCA14DF004967A3 /* ImageBrowerSingerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1C35CD1CCA14DF004967A3 /* ImageBrowerSingerVC.m */; };
 		CC1C35D31CCA6447004967A3 /* FavoriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1C35D21CCA6447004967A3 /* FavoriteVC.m */; };
 		CC1C35D61CCA6979004967A3 /* ContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1C35D51CCA6979004967A3 /* ContentVC.m */; };
+		CC37F0751CCEFCA10057EE56 /* pic_imgCache.png in Resources */ = {isa = PBXBuildFile; fileRef = CC37F0741CCEFCA10057EE56 /* pic_imgCache.png */; };
 		CC43E4FB1CC11426004FDBA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC43E4FA1CC11426004FDBA0 /* main.m */; };
 		CC43E4FE1CC11426004FDBA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC43E4FD1CC11426004FDBA0 /* AppDelegate.m */; };
 		CC43E5011CC11426004FDBA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC43E5001CC11426004FDBA0 /* ViewController.m */; };
@@ -22,7 +23,6 @@
 		CC4C87E71CCE055C0018D3F5 /* CollCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC4C87E51CCE055C0018D3F5 /* CollCell.xib */; };
 		CC4C87E91CCE3C240018D3F5 /* pic_set.png in Resources */ = {isa = PBXBuildFile; fileRef = CC4C87E81CCE3C240018D3F5 /* pic_set.png */; };
 		CC4C87EB1CCE40BD0018D3F5 /* pic_set1.png in Resources */ = {isa = PBXBuildFile; fileRef = CC4C87EA1CCE40BD0018D3F5 /* pic_set1.png */; };
-		CC4C87ED1CCE51CA0018D3F5 /* pic_imgCache.png in Resources */ = {isa = PBXBuildFile; fileRef = CC4C87EC1CCE51CA0018D3F5 /* pic_imgCache.png */; };
 		CC5631A81CC9B1F300319F81 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5631A61CC9B1F300319F81 /* ImageCell.m */; };
 		CC5631A91CC9B1F300319F81 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5631A71CC9B1F300319F81 /* ImageCell.xib */; };
 		CC5C63D51CC4D996000575BC /* NewsCellWVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5C63D41CC4D996000575BC /* NewsCellWVC.m */; };
@@ -79,6 +79,7 @@
 		CC1C35D21CCA6447004967A3 /* FavoriteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteVC.m; sourceTree = "<group>"; };
 		CC1C35D41CCA6979004967A3 /* ContentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentVC.h; sourceTree = "<group>"; };
 		CC1C35D51CCA6979004967A3 /* ContentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentVC.m; sourceTree = "<group>"; };
+		CC37F0741CCEFCA10057EE56 /* pic_imgCache.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic_imgCache.png; sourceTree = "<group>"; };
 		CC43E4F61CC11426004FDBA0 /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC43E4FA1CC11426004FDBA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CC43E4FC1CC11426004FDBA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -96,7 +97,6 @@
 		CC4C87E51CCE055C0018D3F5 /* CollCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollCell.xib; sourceTree = "<group>"; };
 		CC4C87E81CCE3C240018D3F5 /* pic_set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic_set.png; sourceTree = "<group>"; };
 		CC4C87EA1CCE40BD0018D3F5 /* pic_set1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic_set1.png; sourceTree = "<group>"; };
-		CC4C87EC1CCE51CA0018D3F5 /* pic_imgCache.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic_imgCache.png; sourceTree = "<group>"; };
 		CC5631A51CC9B1F300319F81 /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
 		CC5631A61CC9B1F300319F81 /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		CC5631A71CC9B1F300319F81 /* ImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
@@ -302,7 +302,7 @@
 				CC62245F1CCD07CF00A2502F /* pic_favorite.png */,
 				CC62245A1CCD066A00A2502F /* pic_img.png */,
 				CC62245B1CCD066A00A2502F /* pic_news.png */,
-				CC4C87EC1CCE51CA0018D3F5 /* pic_imgCache.png */,
+				CC37F0741CCEFCA10057EE56 /* pic_imgCache.png */,
 			);
 			name = tabbaricon;
 			sourceTree = "<group>";
@@ -537,7 +537,7 @@
 				CC62245D1CCD066A00A2502F /* pic_img.png in Resources */,
 				CC4C87E71CCE055C0018D3F5 /* CollCell.xib in Resources */,
 				CC43E5041CC11426004FDBA0 /* Main.storyboard in Resources */,
-				CC4C87ED1CCE51CA0018D3F5 /* pic_imgCache.png in Resources */,
+				CC37F0751CCEFCA10057EE56 /* pic_imgCache.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,10 +705,11 @@
 		CC43E50E1CC11426004FDBA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = News/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qingyun.toutiao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -719,10 +720,11 @@
 		CC43E50F1CC11426004FDBA0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = News/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qingyun.toutiao;
 				PRODUCT_NAME = "$(TARGET_NAME)";

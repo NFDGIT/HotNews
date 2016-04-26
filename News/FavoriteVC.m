@@ -31,7 +31,7 @@
     if (self.tabBarController.view.frame.origin.x==0) {
         
         [UIView  animateWithDuration:0.2 animations: ^{
-            self.tabBarController.view.transform=CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width*2/3, 0);
+            self.tabBarController.view.transform=CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width*2/5, 0);
         } ];
         
     }else{

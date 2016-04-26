@@ -111,7 +111,7 @@ static NSString *identifier=@"cell";
 -(void)popDialogBox{
     
     NSString *version=[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
-    UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"当前版本" message:[NSString stringWithFormat:@"当前版本为:%@.0",version] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"当前版本" message:[NSString stringWithFormat:@"当前版本为:%@.0   支持系统版本8.0+",version] preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:action];
     

@@ -13,10 +13,22 @@
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleAspectFit" semanticContentAttribute="playback" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="热度资讯，做最懂你的新闻！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCg-QZ-8ME">
+                                <rect key="frame" x="190" y="290" width="221" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.35453684009999997" blue="0.23385612920000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SCg-QZ-8ME" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="2OO-V3-6u7"/>
+                            <constraint firstItem="SCg-QZ-8ME" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="vwD-47-JnM"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -59,6 +59,7 @@
 NSMutableArray *favorite=[[Channels shareSetting] getFavoritePhoto];
     if (favorite==nil) {
         favorite=[NSMutableArray array];
+        self.isFavorited=NO;
     }
     
     
@@ -67,9 +68,9 @@ NSMutableArray *favorite=[[Channels shareSetting] getFavoritePhoto];
         for (NSDictionary *info in favorite) {
             if ([info[@"id"] isEqualToString:self.imageDict[@"id"]]) {
                 [favorite removeObject:info];
-                if (favorite.count==0) {
-                    break;
-                }
+                
+      
+                 break;
             }
         }
     
