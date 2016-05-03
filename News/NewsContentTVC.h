@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 @interface NewsContentTVC : UITableViewController
 @property (nonatomic,assign)NSInteger countIndex;
 @property (nonatomic,strong)NSString *nIconUrl;

@@ -12,7 +12,7 @@
 
 #import "AFNetworking.h"
 
-@interface NewsCellWVC () <UIWebViewDelegate>
+@interface NewsCellWVC () //<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *favoriteBtn;
 @property (nonatomic,strong)UIWebView *webView;
 
@@ -119,13 +119,13 @@
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.urlString]];
     
     
-    //获取html源码
-            NSString *jsToGetHTMLSource = @"document.getElementsByTagName('html')[0].innerHTML";
-    
-            NSString *HTMLSource = [self.webView stringByEvaluatingJavaScriptFromString:jsToGetHTMLSource];
-            NSLog(@"data  ========   %@",HTMLSource);
-    
-    self.webView.delegate = self;
+//    //获取html源码
+//            NSString *jsToGetHTMLSource = @"document.getElementsByTagName('html')[0].innerHTML";
+//    
+//            NSString *HTMLSource = [self.webView stringByEvaluatingJavaScriptFromString:jsToGetHTMLSource];
+//           // NSLog(@"data  ========   %@",HTMLSource);
+//    
+//    self.webView.delegate = self;
     
     [self.view addSubview:self.webView];
     
@@ -133,9 +133,9 @@
     
 }
 
--(void)webViewDidStartLoad:(UIWebView *)webView {
-    [webView stringByEvaluatingJavaScriptFromString:@"javascript:document.getElementById('head','body').style.display='none';"];
-}
+//-(void)webViewDidStartLoad:(UIWebView *)webView {
+//    [webView stringByEvaluatingJavaScriptFromString:@"javascript:document.getElementById('head','body').style.display='none';"];
+//}
 
 
 //- (void)loadData {

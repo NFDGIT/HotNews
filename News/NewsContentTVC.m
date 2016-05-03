@@ -48,20 +48,20 @@
 @implementation NewsContentTVC
 static NSString *cellIdentifier=@"cell";
 
--(NSMutableArray *)subcChannels{
-    if (_subcChannels==nil) {
-        _subcChannels=[[Channels shareSetting]getSubcribeSetting];
-    }
-    return _subcChannels;
-}
+//-(NSMutableArray *)subcChannels{
+//    if (_subcChannels==nil) {
+//        _subcChannels=[[Channels shareSetting]getSubcribeSetting];
+//    }
+//    return _subcChannels;
+//}
 
 
--(Channels *)pChannels{
-    if (!_pChannels) {
-        _pChannels=[[Channels alloc]init];
-    }
-    return _pChannels;
-}
+//-(Channels *)pChannels{
+//    if (!_pChannels) {
+//        _pChannels=[[Channels alloc]init];
+//    }
+//    return _pChannels;
+//}
 
 +(instancetype)instantTableVCWith:(NSInteger)index{
  
@@ -76,6 +76,9 @@ static NSString *cellIdentifier=@"cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     //给下拉刷新  和  加载更多的  次数进行  初始化
+    self.pChannels=[Channels shareSetting];
+    self.subcChannels=[self.pChannels getSubcribeSetting];
+    
     
     self.isUpOrDown=YES;
     self.numbOfDropdown=0;
